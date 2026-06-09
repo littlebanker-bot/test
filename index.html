@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your First Day in the City - Genially Minimalist Style</title>
+    <!-- Premium Corporate Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-canvas: #f8f9fa;        /* Clean, open minimalist backdrop */
+            --slide-bg: #ffffff;         /* Crisp pure-white slide container */
+            --border-subtle: #e4e7ec;    /* Elegant layout dividers */
+            --text-main: #1d2939;        /* Sharp editorial dark gray */
+            --text-muted: #667085;       /* Editorial descriptive gray */
+            --corporate-blue: #0f2942;   /* High-end City of London Banking Blue */
+            --accent-gold: #c5a059;      /* Elite advisory accent gold tint */
+            --hover-tint: #f4f5f7;       /* Soft background micro-interaction */
+            --speed: 0.35s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 16:9 Genially Canvas Frame Simulation */
+        .genially-slide-frame {
+            width: 100%;
+            max-width: 960px;
+            min-height: 540px;
+            background-color: var(--slide-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px; /* Crisp, architectural edges typical of minimal presentations */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* View State Controller */
+        .slide-layout {
+            display: none;
+            width: 100%;
+        }
+
+        .slide-layout.active {
+            display: flex;
+            animation: slideReveal var(--speed) cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes slideReveal {
+            from { opacity: 0; transform: scale(0.99) translateX(10px); }
+            to { opacity: 1; transform: scale(1) translateX(0); }
+        }
+
+        /* Editorial Left Structural Sidebar */
+        .sidebar-indicator {
+            width: 240px;
+            background-color: #fafbfc;
+            border-right: 1px solid var(--border-subtle);
+            padding: 48px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand-header {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--corporate-blue);
+        }
+
+        .step-index-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .step-node {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color var(--speed);
+        }
+
+        .step-node.active {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .step-node::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--border-subtle);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .step-node.active::before {
+            background-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.15);
+        }
+
+        /* Main Content Panel */
+        .content-panel {
+            flex: 1;
+            padding: 64px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .subtitle-context {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        h1.slide-title {
+            font-size: 36px;
+            font-weight: 300; /* Light, elegant serif/sans weight common in minimal designs */
+            color: var(--corporate-blue);
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        h1.slide-title strong {
+            font-weight: 700;
+        }
+
+        p.slide-body {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 520px;
+        }
+
+        /* Minimal Narrative Choice Elements */
+        .pillars-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .pillar-row {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            padding: 16px 24px;
+            text-align: left;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all var(--speed) ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pillar-row:hover {
+            background-color: var(--hover-tint);
+            border-color: var(--corporate-blue);
+            padding-left: 32px; /* Smooth typographic sliding interaction */
+        }
+
+        .pillar-row::after {
+            content: '→';
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all var(--speed);
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .pillar-row:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Call To Action Components */
+        .action-trigger {
+            background-color: var(--corporate-blue);
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background-color var(--speed);
+            display: inline-flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .action-trigger:hover {
+            background-color: #163756;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 0;
+            margin-top: 24px;
+            max-width: 440px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .form-row input[type="email"] {
+            flex: 1;
+            border: none;
+            padding: 14px 18px;
+            font-size: 14px;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .form-row .action-trigger {
+            margin-top: 0;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="genially-slide-frame">
+        
+        <!-- SIDEBAR PLATFORM NAVIGATION (Persistent Layout Asset) -->
+        <div class="sidebar-indicator">
+            <div>
+                <div class="brand-header">Little Banker</div>
+                <div class="step-index-group">
+                    <div class="step-node active" id="node-0">Introduction</div>
+                    <div class="step-node" id="node-1">Scenario I</div>
+                    <div class="step-node" id="node-2">Scenario II</div>
+                    <div class="step-node" id="node-3">Scenario III</div>
+                    <div class="step-node" id="node-rc">Final Profile</div>
+                </div>
+            </div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: 500;">City Simulator v1.0</div>
+        </div>
+
+        <!-- SLIDE 1: INCEPTION LAYER -->
+        <div id="slide-intro" class="slide-layout active">
+            <div class="content-panel">
+                <div class="subtitle-context">Executive Briefing</div>
+                <h1 class="slide-title">Your First Day in the <strong>City of London</strong></h1>
+                <p class="slide-body">Welcome to Canary Wharf. You are stepping onto the floor of a global financial institution. Over the course of three critical strategic choices, we will map out your processing tendencies to reveal your ideal high-tier banking sector.</p>
+                <button class="action-trigger" onclick="advanceToQuiz()">Initialize Simulator →</button>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: INTERACTIVE SIMULATION MATRIX -->
+        <div id="slide-quiz" class="slide-layout">
+            <div class="content-panel">
+                <div class="subtitle-context" id="slide-context-tag">Scenario 1 of 3</div>
+                <h1 class="slide-title" id="display-headline">Loading Matrix Headline...</h1>
+                <p class="slide-body" id="display-narrative">Loading scenario narrative details...</p>
+                
+                <div class="pillars-grid" id="display-choices">
+                    <!-- Dynamic Interactive Rows Injected via Engine -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: EVALUATION PROFILE & LEAD DISCOVERY -->
+        <div id="slide-result" class="slide-layout">
+            <div class="content-panel">
+                <div class="subtitle-context">Evaluation Matrix Complete</div>
+                <h1 class="slide-title" id="target-title">The Dealmaker</h1>
+                <p class="slide-body" id="target-description">Calculating parameters...</p>
+                
+                <div style="border-top: 1px solid var(--border-subtle); padding-top: 24px;">
+                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--corporate-blue);">Request Strategic Career Documentation</h4>
+                    <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5;">Enter your destination address below to receive our complete Year 11 Sixth-Form Blueprint tailored directly to your resulting sector.</p>
+                    <div class="form-row">
+                        <input type="email" placeholder="name@domain.co.uk" required>
+                        <button class="action-trigger" onclick="alert('Blueprint transmitted successfully.')">Access PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Core Interactive Scripting Logic -->
+    <script>
+        const structuralScenarios = [
+            {
+                headline: "The £1.2B Tech Acquisition",
+                narrative: "A global cloud enterprise seeks to acquire an independent UK game studio for a valuation of £1.2 Billion. The desk manager drops the transaction file directly in front of you. Where does your primary analysis pivot?",
+                choices: [
+                    { string: "Formulate a comprehensive market deck evaluating how this acquisition shifts defense lines against international conglomerates.", key: "ma" },
+                    { string: "Monitor live spot markets and exchange indices to calculate if the cash consideration represents an intrinsic overvaluation.", key: "markets" },
+                    { string: "Analyze retrospective consumer engagement variables using Python to script a five-year rolling revenue trend model.", key: "quant" }
+                ]
+            },
+            {
+                headline: "The Central Bank Volatility Shock",
+                narrative: "An unpredicted mid-session monetary rate correction sends trading volumes soaring. Real-time market indices pivot sharp red across the terminal network. What action layer do you adopt?",
+                choices: [
+                    { string: "Initiate direct correspondence streams with key corporate clients to contextualize the macro-risk to their corporate credit profiles.", key: "ma" },
+                    { string: "Execute real-time hedging orders directly through execution systems to protect short-term portfolio exposures.", key: "markets" },
+                    { string: "Interrogate backend automated trade routing scripts to ensure algorithmic parameters are processing market spread volatility correctly.", key: "quant" }
+                ]
+            },
+            {
+                headline: "Strategic Resource Allocation",
+                narrative: "It is late afternoon on Friday. A quiet window opens before market close across the European desks. Which operational environment draws your focus?",
+                choices: [
+                    { string: "Refining a complex transaction pitch proposal alongside senior advisory directors ahead of a major corporate presentation.", key: "ma" },
+                    { string: "Analyzing structural variance logs on international currency futures as Far East liquidity channels open.", key: "markets" },
+                    { string: "Constructing automated logic dashboards to streamline a manual analytical process on the desk.", key: "quant" }
+                ]
+            }
+        ];
+
+        const corporateProfiles = {
+            ma: {
+                headline: "Corporate Advisory & M&A",
+                text: "Your core parameters align precisely with investment banking advisory roles. You exhibit sharp long-term strategic visualization, strong commercial logic, and a preference for macro industrial positioning. Your professional space lives within high-value boardrooms, guiding key corporate leaders through complex transactions."
+            },
+            markets: {
+                headline: "Sales & Global Markets Trading",
+                text: "Your parameters map directly to liquid asset distribution and market making tracks. You process structural volatility efficiently, maintain focus inside intense data-saturated hubs, and appreciate real-time accountability. Your execution space is built for active trading environments."
+            },
+            quant: {
+                headline: "Quantitative Strategy & Financial Tech",
+                text: "Your alignment indicators favor systemic data development and algorithmic engineering. You interpret financial systems as complex analytical architectures. Rather than trading arbitrary data fluctuations manually, your drive directs you to write the algorithmic structures that execute institutional order books automatically."
+            }
+        };
+
+        let pointer = 0;
+        let cumulativeScores = { ma: 0, markets: 0, quant: 0 };
+
+        function updateSidebarNode(activeId) {
+            document.querySelectorAll('.step-node').forEach(node => node.classList.remove('active'));
+            const targetNode = document.getElementById(activeId);
+            if (targetNode) targetNode.classList.add('active');
+        }
+
+        function switchSlideContainer(targetContainerId) {
+            document.querySelectorAll('.slide-layout').forEach(slide => slide.classList.remove('active'));
+            document.getElementById(targetContainerId).classList.add('active');
+        }
+
+        function advanceToQuiz() {
+            pointer = 0;
+            cumulativeScores = { ma: 0, markets: 0, quant: 0 };
+            switchSlideContainer('slide-quiz');
+            executeMatrixRender();
+        }
+
+        function executeMatrixRender() {
+            const indexData = structuralScenarios[pointer];
+            
+            // Sync Navigation Assets
+            updateSidebarNode(`node-${pointer + 1}`);
+            document.getElementById('slide-context-tag').innerText = `Strategic Scenario 0${pointer + 1} of 03`;
+            
+            // Load Contextual UI Text
+            document.getElementById('display-headline').innerText = indexData.headline;
+            document.getElementById('display-narrative').innerText = indexData.narrative;
+
+            // Generate Functional Pillars
+            const gridContainer = document.getElementById('display-choices');
+            gridContainer.innerHTML = '';
+
+            indexData.choices.forEach(choice => {
+                const rowElement = document.createElement('button');
+                rowElement.className = 'pillar-row';
+                rowElement.innerText = choice.string;
+                rowElement.onclick = () => registerParameterSelection(choice.key);
+                gridContainer.appendChild(rowElement);
+            });
+        }
+
+        function registerParameterSelection(keyFactor) {
+            cumulativeScores[keyFactor]++;
+            pointer++;
+
+            if (pointer < structuralScenarios.length) {
+                executeMatrixRender();
+            } else {
+                compileFinalProfile();
+            }
+        }
+
+        function compileFinalProfile() {
+            updateSidebarNode('node-rc');
+            switchSlideContainer('slide-result');
+            
+            let optimalTrack = 'ma';
+            let initialBenchmark = -1;
+            
+            for (const profileKey in cumulativeScores) {
+                if (cumulativeScores[profileKey] > initialBenchmark) {
+                    initialBenchmark = cumulativeScores[profileKey];
+                    optimalTrack = profileKey;
+                }
+            }
+
+            const calculationResult = corporateProfiles[optimalTrack];
+            document.getElementById('target-title').innerHTML = `Matched Profile: <strong>${calculationResult.headline}</strong>`;
+            document.getElementById('target-description').innerText = calculationResult.text;
+        }
+    </script>
+</body>
+</html>
